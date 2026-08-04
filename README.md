@@ -57,17 +57,27 @@ conda activate bm_outlier
 
 ## Input data
 
-The analysis reads two source workbooks from a local **`data/`** directory (path
-configurable in `config.py`). **These files are not committed to the repo** — they
-are compiled extracts of publicly-available data and should be pulled fresh from
-the authoritative sources:
+**This repo ships a small sample dataset so it runs out of the box.**
+`config.py` defaults to `USE_SAMPLE = True`, which reads a committed 16-benchmark
+subset in **`data/sample/`** covering the four worked-example tide stations in the
+report (Pascagoula, Fort Pickens, Sewells Point, and DK3432's Honolulu station).
+Clone the repo, create the environment, run `python run_all.py`, and every worked
+example and station figure reproduces — no data acquisition step.
 
-- `data/OPUS__3-10-26.xlsx` — OPUS observations (many rows per PID), derived from
-  the **NGS OPUS** published datasheets / GIS feature layer.
-- `data/CO-OPS__3-12-26.xlsx` — CO-OPS tidal datums (one row per PID-per-station),
-  from the **CO-OPS** benchmark/datums holdings (public datums pages / API).
+- `data/sample/OPUS_sample.xlsx` — 61 OPUS observations, 16 PIDs.
+- `data/sample/CO-OPS_sample.xlsx` — the matching CO-OPS datum rows.
 
-Place both files in `data/` before running. Paths, temporal windows, and all
+**To reproduce the full study**, you need the complete source record used in the
+report — **8,127 OPUS observations across 3,330 PIDs** — which is **not
+distributed here** (it is a large compiled extract of publicly-available data).
+Obtain the two workbooks from the authoritative sources and place them in `data/`:
+
+- `data/OPUS__3-10-26.xlsx` — OPUS observations, from the **NGS OPUS** published
+  datasheets / GIS feature layer.
+- `data/CO-OPS__3-12-26.xlsx` — CO-OPS tidal datums, from the **CO-OPS**
+  benchmark/datums holdings (public datums pages / API).
+
+Then set `USE_SAMPLE = False` in `config.py`. All paths, temporal windows, and
 method parameters live in **`config.py`** — the single place to review or change
 how the analysis behaves.
 
@@ -139,7 +149,8 @@ OPUS_Outlier_Analysis/
 ├─ config.py          all paths, windows, method parameters (start here)
 ├─ run_all.py         orchestrator
 ├─ pipeline/          s01 … s08 stage scripts
-├─ data/              source workbooks (OPUS + CO-OPS) — local only, not committed
+├─ data/              sample dataset (committed, in data/sample/); full record local-only
+│  └─ sample/         16-benchmark subset so the repo runs out of the box
 ├─ docs/              In_Depth_Report.md (findings, with embedded figures)
 ├─ outputs/           generated tables + gis (not committed); figures ARE committed
 └─ README.md

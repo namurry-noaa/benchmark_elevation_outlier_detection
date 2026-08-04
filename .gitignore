@@ -23,15 +23,23 @@ __pycache__/
 # --- Session handoff (private, lives in parent dir; ignore if copied in) ---
 *_summary.claude
 
-# --- Source data workbooks (NOT committed) ---
-# The OPUS + CO-OPS workbooks are compiled extracts of publicly-available data
-# (NGS OPUS datasheets / CO-OPS datums API). We do NOT re-host them in this public
-# repo -- pull fresh from the authoritative sources (see README "Input data").
-# They live locally in data/ so the pipeline runs; git just ignores them.
-data/
+# --- Source data workbooks ---
+# The FULL OPUS + CO-OPS workbooks are compiled extracts of publicly-available
+# data (NGS OPUS / CO-OPS datums API). We do NOT re-host the full record in this
+# public repo -- obtain it from source (see README "Input data") and drop it in
+# data/ to run the full study.
+# EXCEPTION: the small committed SAMPLE (data/sample/) IS tracked so a fresh clone
+# runs out of the box and reproduces the report's worked examples.
+#
+# Order matters: broad ignores FIRST, then the stepwise sample re-include LAST so
+# nothing downstream re-ignores it.
 *.xlsx
 *.xls
 *.csv
+data/*
+!data/sample/
+!data/sample/OPUS_sample.xlsx
+!data/sample/CO-OPS_sample.xlsx
 
 # --- OS / editor cruft ---
 .DS_Store

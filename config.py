@@ -15,11 +15,36 @@ import datetime as _dt
 # Project root = the OPUS_Outlier_Analysis directory (where this file lives).
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# Source workbook (OPUS full dump). IDB and CO-OPS are intentionally NOT here;
-# they enter only at the later join stage, per project scope.
-# Data now lives in an in-repo `data/` dir (tracked separately by the user).
+# ---------------------------------------------------------------------------
+# Source workbooks.
+#
+#   DATASET SELECTION (USE_SAMPLE):
+#   This repo ships a small, committed SAMPLE dataset (data/sample/) covering the
+#   four worked-example tide stations from the report (Pascagoula, Fort Pickens,
+#   Sewells Point, and DK3432's Honolulu station) -- 16 benchmarks. It exists so a
+#   fresh clone RUNS OUT OF THE BOX and reproduces every worked example / station
+#   figure, with no data acquisition step.
+#
+#   The FULL analysis in the report used the complete OPUS + CO-OPS record
+#   (8,127 observations / 3,330 PIDs). Those raw workbooks are NOT distributed with
+#   this public repo. To reproduce the full study, obtain the two workbooks from
+#   the authoritative sources (see README "Input data"), drop them in data/ with
+#   the names below, and set USE_SAMPLE = False.
+#
+# IDB and (for OPUS) CO-OPS are intentionally separate; CO-OPS enters only at the
+# join stage (s06), per project scope.
+# ---------------------------------------------------------------------------
+USE_SAMPLE = True  # True = committed sample (clone-and-run); False = full local data
+
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-OPUS_XLSX = os.path.join(DATA_DIR, "OPUS__3-10-26.xlsx")
+SAMPLE_DIR = os.path.join(DATA_DIR, "sample")
+
+if USE_SAMPLE:
+    OPUS_XLSX = os.path.join(SAMPLE_DIR, "OPUS_sample.xlsx")
+    COOPS_XLSX = os.path.join(SAMPLE_DIR, "CO-OPS_sample.xlsx")
+else:
+    OPUS_XLSX = os.path.join(DATA_DIR, "OPUS__3-10-26.xlsx")
+    COOPS_XLSX = os.path.join(DATA_DIR, "CO-OPS__3-12-26.xlsx")
 
 # Output tree
 OUTPUT_DIR = os.path.join(PROJECT_ROOT, "outputs")
@@ -30,8 +55,6 @@ GIS_DIR = os.path.join(OUTPUT_DIR, "gis")
 # Intermediate output of stage 01
 S01_CLEAN_CSV = os.path.join(TABLES_DIR, "s01_opus_clean.csv")
 
-# CO-OPS tidal-datum workbook (enters only at the join stage, s06).
-COOPS_XLSX = os.path.join(DATA_DIR, "CO-OPS__3-12-26.xlsx")
 
 # ---------------------------------------------------------------------------
 # Source column names (exactly as they appear in the OPUS workbook header).
