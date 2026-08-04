@@ -1,0 +1,40 @@
+# --- Generated / derived outputs (reproducible via run_all.py) ---
+# Ignore the derived tree, EXCEPT the presentation figures (the docs embed them
+# inline, so they must be committed for the .md to render on GitHub).
+# NOTE: to re-include files under an ignored dir, each parent dir must be
+# re-included first, hence the stepwise !outputs/ and !outputs/figures/ below.
+outputs/*
+!outputs/figures/
+outputs/figures/*
+!outputs/figures/*.png
+
+# --- Exported PDFs (derived from the .md sources via VS Code "Markdown PDF") ---
+# The .md files are the source of truth (render on GitHub, diff cleanly).
+# PDFs are disposable publishing artifacts -- regenerate on demand, don't commit.
+docs/*.pdf
+*.pdf
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- Session handoff (private, lives in parent dir; ignore if copied in) ---
+*_summary.claude
+
+# --- Source data workbooks (NOT committed) ---
+# The OPUS + CO-OPS workbooks are compiled extracts of publicly-available data
+# (NGS OPUS datasheets / CO-OPS datums API). We do NOT re-host them in this public
+# repo -- pull fresh from the authoritative sources (see README "Input data").
+# They live locally in data/ so the pipeline runs; git just ignores them.
+data/
+*.xlsx
+*.xls
+*.csv
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

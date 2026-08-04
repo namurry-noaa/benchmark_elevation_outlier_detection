@@ -1,0 +1,13 @@
+# Conda environment for the OPUS Benchmark Outlier Analysis.
+#   Recreate with:  conda env create -f environment.yml
+#   Then:           conda activate bm_outlier
+# Loose pins (no exact build strings) so it resolves on both Windows and Linux.
+name: bm_outlier
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - openpyxl
+  - numpy
+  - matplotlib
+  - geopandas

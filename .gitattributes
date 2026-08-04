@@ -1,0 +1,12 @@
+# Cross-platform line-ending normalization.
+# Store text as LF in the repo; check out native on each OS.
+# This prevents "whole file changed" noise between the Windows work box and the
+# Linux workstation.
+* text=auto eol=lf
+
+# Explicitly binary (never touch these):
+*.png binary
+*.gpkg binary
+*.xlsx binary
+*.xls binary
+*.pdf binary
